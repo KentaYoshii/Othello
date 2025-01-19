@@ -10,8 +10,19 @@ public final class GameBoard {
     private final GameBoardCell[][] gameBoard =
             new GameBoardCell[Constants.NUM_ROW][Constants.NUM_COL];
 
-    boolean temp;
-
     public GameBoard() {}
 
+    /**
+     * Initialize the board with 4 pieces set
+     * - 2 white pieces at (3,3) (4,4)
+     * - 2 black pieces at (3,4) (4,3)
+     * */
+    public void initializeBoard() {
+        // Place the white pieces
+        gameBoard[3][3].placePiece(Constants.PIECE_COLOR.WHITE);
+        gameBoard[4][4].placePiece(Constants.PIECE_COLOR.WHITE);
+        // Place the black pieces
+        gameBoard[3][4].placePiece(Constants.PIECE_COLOR.BLACK);
+        gameBoard[4][3].placePiece(Constants.PIECE_COLOR.BLACK);
+    }
 }

@@ -32,12 +32,12 @@ public class OthelloApp {
      *  - OthelloGamePanel
      *      - OthelloBoardPanel (contains a 8x8 grid of JPanels, each JPanel representing a single cell)
      *  - OthelloControlPanel (holds various control switches)
+     * @param gameBoard GameBoard we are creating
      * */
-    private static void setUpGUI(){
+    private static void setUpGUI(GameBoard gameBoard){
         // Othello Frame
         OthelloFrame othelloFrame = new OthelloFrame();
         // Othello GamePanel and create Board
-        GameBoard gameBoard = new GameBoard();
         OthelloGamePanel gamePanel = new OthelloGamePanel(gameBoard);
         // Othello Control Panel
         OthelloControlPanel controlPanel = new OthelloControlPanel();
@@ -47,8 +47,11 @@ public class OthelloApp {
     }
 
     public static void main(String[] args) {
-        setUpGUI();
+        GameBoard gameBoard = new GameBoard();
+        // Setup GUI
+        setUpGUI(gameBoard);
+        // Initialize Game
+        gameBoard.initializeBoard();
     }
-
 }
 

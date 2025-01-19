@@ -23,6 +23,8 @@ public final class Constants {
     public static final int BOARD_CELL_SIZE_X = 25;
     public static final int BOARD_CELL_SIZE_Y = 25;
     public static final int BOARD_GRID_GAP = 5;
+    // Piece Panel
+    public static final int PIECE_SIZE = 60;
 
     // Colors
     public static final Color CONTROL_PANEL_BG = Color.LIGHT_GRAY;
@@ -33,5 +35,9 @@ public final class Constants {
     // Game Constants
     public static final int NUM_ROW = 8;
     public static final int NUM_COL = 8;
+
+    public enum PIECE_COLOR {
+        BLACK, WHITE
+    }
 }
 
