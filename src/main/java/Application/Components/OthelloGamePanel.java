@@ -1,7 +1,7 @@
 package Application.Components;
 
 import Application.Constants;
-import Application.GameObject.GameBoard;
+import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,10 @@ public class OthelloGamePanel extends JPanel {
     private static final Dimension defaultGamePanelDimension =
             new Dimension(Constants.GAME_PANEL_SIZE_X, Constants.GAME_PANEL_SIZE_Y);
 
-    public OthelloGamePanel(GameBoard gameBoard) {
+    @Getter
+    private JPanel boardPanel;
+
+    public OthelloGamePanel() {
         this.setPreferredSize(defaultGamePanelDimension);
         this.setBackground(Constants.GAME_PANEL_BG);
         this.setLayout(new BorderLayout());
@@ -26,7 +29,7 @@ public class OthelloGamePanel extends JPanel {
         ));
 
         // Create Board Panel which will contain the Game Board
-        OthelloBoardPanel boardPanel = new OthelloBoardPanel(gameBoard);
-        this.add(boardPanel, BorderLayout.CENTER);
+        this.boardPanel = new OthelloBoardPanel();
+        this.add(this.boardPanel, BorderLayout.CENTER);
     }
 }

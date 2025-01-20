@@ -3,6 +3,7 @@ package Application;
 import Application.Components.OthelloControlPanel;
 import Application.Components.OthelloFrame;
 import Application.Components.OthelloGamePanel;
+import Application.GameLogic.GameBoardManager;
 import Application.GameObject.GameBoard;
 
 import javax.swing.*;
@@ -32,26 +33,28 @@ public class OthelloApp {
      *  - OthelloGamePanel
      *      - OthelloBoardPanel (contains a 8x8 grid of JPanels, each JPanel representing a single cell)
      *  - OthelloControlPanel (holds various control switches)
-     * @param gameBoard GameBoard we are creating
+     * @return JPanel for game board
      * */
-    private static void setUpGUI(GameBoard gameBoard){
+    private static OthelloGamePanel setUpGUI(){
         // Othello Frame
         OthelloFrame othelloFrame = new OthelloFrame();
         // Othello GamePanel and create Board
-        OthelloGamePanel gamePanel = new OthelloGamePanel(gameBoard);
+        OthelloGamePanel gamePanel = new OthelloGamePanel();
         // Othello Control Panel
         OthelloControlPanel controlPanel = new OthelloControlPanel();
         // Add Panels to Frame
         othelloFrame.add(gamePanel, BorderLayout.CENTER);
         othelloFrame.add(controlPanel, BorderLayout.EAST);
+        return gamePanel;
     }
 
     public static void main(String[] args) {
-        GameBoard gameBoard = new GameBoard();
         // Setup GUI
-        setUpGUI(gameBoard);
-        // Initialize Game
-        gameBoard.initializeBoard();
+        OthelloGamePanel gamePanel = setUpGUI();
+        // Initialize Game Board Manager
+        GameBoardManager gameBoardManager = new GameBoardManager(gamePanel);
+        // Start a new game!
+        gameBoardManager.createNewGame(Constants.GAME_MODE.HUMAN);
     }
 }
 

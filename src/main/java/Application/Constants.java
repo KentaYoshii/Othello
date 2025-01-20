@@ -33,11 +33,21 @@ public final class Constants {
     public static final Color BOARD_CELL_BG = Color.GREEN;
 
     // Game Constants
+
     public static final int NUM_ROW = 8;
     public static final int NUM_COL = 8;
 
+    // Represents the piece color
     public enum PIECE_COLOR {
         BLACK, WHITE
+    }
+
+    // In Othello, Black always starts first
+    public static final PIECE_COLOR INITIAL_TURN = PIECE_COLOR.BLACK;
+
+    // Game mode
+    public enum GAME_MODE {
+        HUMAN, AI
     }
 }
 

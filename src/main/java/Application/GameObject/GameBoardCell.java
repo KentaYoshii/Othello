@@ -5,6 +5,7 @@ import Application.Constants.PIECE_COLOR;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.function.BiConsumer;
 
 public class GameBoardCell {
     // Panel representing the board cell
@@ -17,23 +18,24 @@ public class GameBoardCell {
     // flag
     boolean isPiecePlaced;
 
-    public GameBoardCell(JPanel panel, int rowIdx, int colIdx) {
+    public GameBoardCell(JPanel panel, int rowIdx, int colIdx,
+                         BiConsumer<Integer, Integer> onClickConsumer) {
         this.panel = panel;
         this.piece = new OthelloPiece();
         this.panel.add(piece);
         this.rowLoc = rowIdx;
         this.colLoc = colIdx;
-        this.setClickListener();
+        this.setClickListener(onClickConsumer, this.rowLoc, this.colLoc);
     }
 
-    private void setClickListener() {
+    private void setClickListener(BiConsumer<Integer, Integer> onClickConsumer, Integer row, Integer col) {
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (isPiecePlaced) {
                     return;
                 }
-                // placePiece();
+                onClickConsumer.accept(row, col);
             }
         });
     }
