@@ -66,10 +66,10 @@ public class OthelloPiece extends JPanel {
         g2d.draw(circle);
     }
 
-//    public void flip() {
-//        isBlack = !isBlack;
-//        repaint();
-//    }
+    public void flip() {
+        this.color = color == PIECE_COLOR.BLACK ? PIECE_COLOR.WHITE : PIECE_COLOR.BLACK;
+        repaint();
+    }
 //
 //    public boolean isBlack() {
 //        return isBlack;

@@ -46,4 +46,8 @@ public class GameBoardCell {
         piece.setVisible(true);
         piece.repaint();
     }
+
+    public void flipPiece() {
+        piece.flip();
+    }
 }

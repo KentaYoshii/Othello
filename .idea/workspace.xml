@@ -5,22 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26b772f1-967e-4889-8865-26291b416a4d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Application/GameLogic/GameBoardManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Application/GameLogic/GameTurnManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Application/GameLogic/IGameBoardManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Application/GameLogic/IOthelloClickEventListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Application/GameLogic/ITurnManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Application/GameObject/AI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Application/GameObject/AbstractPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Application/GameObject/HumanPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Application/GameObject/IPlayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Application/GameLogic/OthelloLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/Components/OthelloBoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/Components/OthelloBoardPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/Components/OthelloGamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/Components/OthelloGamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Application/GameLogic/GameBoardManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/GameLogic/GameBoardManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Application/GameLogic/IOthelloClickEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/GameLogic/IOthelloClickEventListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Application/GameObject/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/GameObject/GameBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Application/GameObject/GameBoardCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/GameObject/GameBoardCell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Application/OthelloApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/OthelloApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Application/GameObject/OthelloPiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application/GameObject/OthelloPiece.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1737238703380</updated>
       <workItem from="1737238704402" duration="1056000" />
-      <workItem from="1737239871685" duration="26792000" />
+      <workItem from="1737239871685" duration="33224000" />
     </task>
     <servers />
   </component>

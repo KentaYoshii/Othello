@@ -37,21 +37,66 @@ public final class GameBoard {
         createBoard();
     }
 
-    private void handleBoardCellClickEvent(int row, int col) {
-        Constants.PIECE_COLOR currentTurn = turnSupplier.get();
-        // Place the piece
-        gameBoard[row][col].placePiece(currentTurn);
-        // Notify the interested parties
-        for (IOthelloClickEventListener listener: notifyees) {
-            listener.onPiecePlaced();
-        }
-    }
-
     /**
      * Register and add a listener to list of notifyees
+     * @param listener An instance of a IOthelloClickEventListener
      * */
     public void registerPostClickEventListener(IOthelloClickEventListener listener) {
         notifyees.add(listener);
+    }
+
+    /**
+     * Initialize the board with 4 pieces set
+     * - 2 white pieces at (3,3) (4,4)
+     * - 2 black pieces at (3,4) (4,3)
+     * */
+    public void initializeBoard() {
+        // Place the white pieces
+        gameBoard[3][3].placePiece(Constants.PIECE_COLOR.WHITE);
+        gameBoard[4][4].placePiece(Constants.PIECE_COLOR.WHITE);
+        // Place the black pieces
+        gameBoard[3][4].placePiece(Constants.PIECE_COLOR.BLACK);
+        gameBoard[4][3].placePiece(Constants.PIECE_COLOR.BLACK);
+    }
+
+    /**
+     * Returns true if a piece can be placed at (row, col). Note that no
+     * input validations are performed since this is called only in the event listener cb
+     * @param row Row location
+     * @param col Column location
+     * @return true if a piece can be placed
+     * */
+    public boolean canPlacePieceAt(int row, int col) {
+        return !gameBoard[row][col].isPiecePlaced;
+    }
+
+    /**
+     * Place a piece at (row, col) using "color".
+     * @param row Row location
+     * @param col Column location
+     * @param color Color of the piece to be placed
+     * */
+    public void placePieceAt(int row, int col, Constants.PIECE_COLOR color) {
+        this.gameBoard[row][col].placePiece(color);
+    }
+
+    /**
+     * Flip a piece at (row, col) using "color".
+     * @param row Row location
+     * @param col Column location
+     * */
+    public void flipPieceAt(int row, int col) {
+        this.gameBoard[row][col].flipPiece();
+    }
+
+    /**
+     * Get the piece color at (row, col).
+     * @param row Row location
+     * @param col Column location
+     * @return color of the piece at (row, col)
+     * */
+    public Constants.PIECE_COLOR getPieceColorAt(int row, int col) {
+        return this.gameBoard[row][col].piece.color;
     }
 
     /**
@@ -74,16 +119,16 @@ public final class GameBoard {
     }
 
     /**
-     * Initialize the board with 4 pieces set
-     * - 2 white pieces at (3,3) (4,4)
-     * - 2 black pieces at (3,4) (4,3)
+     * MouseClick event listener callback. Notify the interested party of the coordinates and the color of the piece
+     * placed.
+     * @param row row location of the piece placed
+     * @param col column location of the piece placed
      * */
-    public void initializeBoard() {
-        // Place the white pieces
-        gameBoard[3][3].placePiece(Constants.PIECE_COLOR.WHITE);
-        gameBoard[4][4].placePiece(Constants.PIECE_COLOR.WHITE);
-        // Place the black pieces
-        gameBoard[3][4].placePiece(Constants.PIECE_COLOR.BLACK);
-        gameBoard[4][3].placePiece(Constants.PIECE_COLOR.BLACK);
+    private void handleBoardCellClickEvent(int row, int col) {
+        Constants.PIECE_COLOR currentTurn = turnSupplier.get();
+        // Notify the interested parties
+        for (IOthelloClickEventListener listener: notifyees) {
+            listener.onPiecePlaced(row, col, currentTurn);
+        }
     }
 }

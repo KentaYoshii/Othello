@@ -10,6 +10,8 @@ import Application.GameObject.HumanPlayer;
 import Application.GameObject.IPlayer;
 import lombok.Getter;
 
+import java.util.List;
+
 public class GameBoardManager implements IGameBoardManager, IOthelloClickEventListener {
 
     // In Othello, Black starts first
@@ -70,10 +72,38 @@ public class GameBoardManager implements IGameBoardManager, IOthelloClickEventLi
     }
 
     @Override
-    public void onPiecePlaced() {
+    public void onPiecePlaced(int rowLoc, int colLoc, PIECE_COLOR color) {
+        // 0. Validate
+        boolean validMove = this.validateMove(rowLoc, colLoc, color);
+        if (!validMove) {
+            return;
+        }
         // 1. Flip any pieces
+        this.flipPieces(rowLoc, colLoc, color);
+        // 2. Placed the piece
+        this.gameBoard.placePieceAt(rowLoc, colLoc, color);
         // 2. Perform any updates
         // 3. Start a new turn
         this.turnManager.startNextTurn();
+    }
+
+    private void flipPieces(int row, int col, PIECE_COLOR color) {
+        List<List<Integer>> results = OthelloLogic.evaluateBoard(this.gameBoard, color, row, col);
+        for (List<Integer> res: results) {
+            this.gameBoard.flipPieceAt(res.get(0), res.get(1));
+        }
+    }
+
+    private boolean validateMove(int row, int col, PIECE_COLOR color) {
+        // Piece is already placed
+        if (!this.gameBoard.canPlacePieceAt(row, col)) {
+            return false;
+        }
+        // Ensure the correct player is playing the turn
+        if (color != this.turnManager.getCurrentTurn()) {
+            return false;
+        }
+        // Ensure piece placement conforms to the rule
+        return true;
     }
 }
