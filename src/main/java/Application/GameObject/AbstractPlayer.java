@@ -5,14 +5,13 @@ import lombok.Getter;
 
 public class AbstractPlayer implements IPlayer {
 
+    @Getter
     PIECE_COLOR color;
+
+    protected boolean showHint = true;
 
     public AbstractPlayer(PIECE_COLOR color) {
         this.color = color;
-    }
-
-    public PIECE_COLOR getColor() {
-        return this.color;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package Application.GameObject;
 
+import Application.Constants;
 import Application.Constants.PIECE_COLOR;
 
 import javax.swing.*;
@@ -49,5 +50,10 @@ public class GameBoardCell {
 
     public void flipPiece() {
         piece.flip();
+    }
+
+    public void highlightCell(boolean on) {
+        panel.setBackground(on ? Constants.BOARD_CELL_HIGHLIGHT_BG : Constants.BOARD_CELL_BG);
+        this.panel.repaint();
     }
 }

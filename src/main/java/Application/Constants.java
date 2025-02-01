@@ -31,6 +31,7 @@ public final class Constants {
     public static final Color GAME_PANEL_BG = new Color(255, 204, 153);
     public static final Color BOARD_PANEL_BG = Color.BLACK;
     public static final Color BOARD_CELL_BG = Color.GREEN;
+    public static final Color BOARD_CELL_HIGHLIGHT_BG = Color.orange;
 
     // Game Constants
 

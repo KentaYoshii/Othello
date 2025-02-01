@@ -32,23 +32,6 @@ public class GameBoardManager implements IGameBoardManager, IOthelloClickEventLi
         this.turnManager = GameTurnManager.getOrCreateTurnManager();
     }
 
-    /**
-     * Flip the turn.
-     * */
-    public void changeTurn() {
-        this.currentTurn = (this.currentTurn == PIECE_COLOR.BLACK) ? PIECE_COLOR.WHITE : PIECE_COLOR.BLACK;
-    }
-
-    @Override
-    public boolean evaluateBoard() {
-        return false;
-    }
-
-    @Override
-    public void onTurnEnd() {
-
-    }
-
     @Override
     public void createNewGame(GAME_MODE mode) {
         // Create the board
@@ -58,8 +41,9 @@ public class GameBoardManager implements IGameBoardManager, IOthelloClickEventLi
         gameBoard.registerPostClickEventListener(this);
         currentTurn = Constants.INITIAL_TURN;
         // Initialize the players
-        IPlayer player1 = new HumanPlayer(PIECE_COLOR.BLACK);
-        IPlayer player2 = mode == GAME_MODE.HUMAN ? new HumanPlayer(PIECE_COLOR.WHITE) : new AI(PIECE_COLOR.WHITE);
+        IPlayer player1 = new HumanPlayer(PIECE_COLOR.BLACK, this);
+        IPlayer player2 = mode == GAME_MODE.HUMAN ?
+                new HumanPlayer(PIECE_COLOR.WHITE, this) : new AI(PIECE_COLOR.WHITE);
         // Register the players
         turnManager.registerPlayers(player1, player2);
         turnManager.startGame();
@@ -78,6 +62,8 @@ public class GameBoardManager implements IGameBoardManager, IOthelloClickEventLi
         if (!validMove) {
             return;
         }
+        // 0. Turn off highlights
+        this.resetHighlights();
         // 1. Flip any pieces
         this.flipPieces(rowLoc, colLoc, color);
         // 2. Placed the piece
@@ -85,6 +71,21 @@ public class GameBoardManager implements IGameBoardManager, IOthelloClickEventLi
         // 2. Perform any updates
         // 3. Start a new turn
         this.turnManager.startNextTurn();
+    }
+
+    public void displayHints(PIECE_COLOR color) {
+        List<List<Integer>> allPlaceableLocs = OthelloLogic.getPlaceableLocations(this.gameBoard, color);
+        for (List<Integer> coords: allPlaceableLocs) {
+            this.gameBoard.highlightCellAt(coords.get(0), coords.get(1), true);
+        }
+    }
+
+    private void resetHighlights() {
+        for (int row = 0; row < Constants.NUM_ROW; row++) {
+            for (int col = 0; col < Constants.NUM_COL; col++) {
+                this.gameBoard.highlightCellAt(row, col, false);
+            }
+        }
     }
 
     private void flipPieces(int row, int col, PIECE_COLOR color) {
@@ -100,10 +101,6 @@ public class GameBoardManager implements IGameBoardManager, IOthelloClickEventLi
             return false;
         }
         // Ensure the correct player is playing the turn
-        if (color != this.turnManager.getCurrentTurn()) {
-            return false;
-        }
-        // Ensure piece placement conforms to the rule
-        return true;
+        return color == this.turnManager.getCurrentTurn();
     }
 }

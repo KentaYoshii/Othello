@@ -60,8 +60,7 @@ public final class GameBoard {
     }
 
     /**
-     * Returns true if a piece can be placed at (row, col). Note that no
-     * input validations are performed since this is called only in the event listener cb
+     * Returns true if a piece can be placed at (row, col).
      * @param row Row location
      * @param col Column location
      * @return true if a piece can be placed
@@ -81,6 +80,16 @@ public final class GameBoard {
     }
 
     /**
+     * Highlight the cell at (row, col).
+     * @param row Row location
+     * @param col Column location
+     * @param on true if we are highlighting the cell, false is we are turning off the highlight
+     * */
+    public void highlightCellAt(int row, int col, boolean on) {
+        this.gameBoard[row][col].highlightCell(on);
+    }
+
+    /**
      * Flip a piece at (row, col) using "color".
      * @param row Row location
      * @param col Column location
@@ -97,6 +106,19 @@ public final class GameBoard {
      * */
     public Constants.PIECE_COLOR getPieceColorAt(int row, int col) {
         return this.gameBoard[row][col].piece.color;
+    }
+
+    /**
+     * Check if given (row, col) is within the bounds of the board
+     * @param row Row coordinate to check
+     * @param col Column coordinate to check
+     * @return true if the input coordinates is out of bounds
+     * */
+    public boolean isOutOfBounds(int row, int col) {
+        if (row < 0 || col < 0) {
+            return true;
+        }
+        return row >= Constants.NUM_ROW || col >= Constants.NUM_COL;
     }
 
     /**
@@ -125,6 +147,9 @@ public final class GameBoard {
      * @param col column location of the piece placed
      * */
     private void handleBoardCellClickEvent(int row, int col) {
+        if (isOutOfBounds(row, col)) {
+            return;
+        }
         Constants.PIECE_COLOR currentTurn = turnSupplier.get();
         // Notify the interested parties
         for (IOthelloClickEventListener listener: notifyees) {
